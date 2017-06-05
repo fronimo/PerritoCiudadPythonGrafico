@@ -5,10 +5,10 @@ import color as c
 matrix=[]
 
 try:
-    dim=int(raw_input('Dimension:'))
-    times=int(raw_input('Nro Intentos:'))
+    dim=int(input('Dimension:'))
+    times=int(input('Nro Intentos:'))
 except ValueError:
-    print "Not a number"
+    print ("Not a number")
 
 def create_matrix(dim,matrix):
 	fil = 0
@@ -25,7 +25,7 @@ def create_matrix(dim,matrix):
 
 def print_matrix(matrix):
 	for fila in matrix:
-		print fila
+		print (fila)
 
 listX = []
 listY = []
@@ -35,8 +35,7 @@ def run_dog(times, dim, matrix, listX, listY):
 	dimN = _dim*10
 	jump =  _dim*10/2#33.33
 	radius = jump/2 #16
-	print jump
-	print jump
+	print (jump)
 	posX = dim/2
 	posY = dim/2
 	listX.append(jump)
@@ -48,28 +47,28 @@ def run_dog(times, dim, matrix, listX, listY):
 			posX = posX+1
 			if matrix[posX][posY] == 0:
 				matrix[posX][posY] = 1
-				print 'abajo'
-				print posX
-				print posY
+				print ('abajo')
+				print (posX)
+				print (posY)
 				listX.append(listX[-1])
 				listY.append(listY[-1]-10)
 				print_matrix(matrix)
 			else :
-				print 'The dog is dead'
+				print ('The dog is dead')
 				return 0
 
 		if aleato == 2:
 			posX = posX-1
 			if matrix[posX][posY] == 0:
 				matrix[posX][posY] = 1
-				print 'arriba'
-				print posX
-				print posY
+				print ('arriba')
+				print (posX)
+				print (posY)
 				listX.append(listX[-1])
 				listY.append(listY[-1]+10)
 				print_matrix(matrix)
 			else :
-				print 'The dog is dead'
+				print ('The dog is dead')
 				return 0
 
 		if aleato == 3:
@@ -77,30 +76,30 @@ def run_dog(times, dim, matrix, listX, listY):
 			if matrix[posX][posY] == 0:
 				matrix[posX][posY] = 1
 				print_matrix(matrix)
-				print 'izquierda'
-				print posX
-				print posY
+				print ('izquierda')
+				print (posX)
+				print (posY)
 				listX.append(listX[-1]-10)
 				listY.append(listY[-1])
 				print_matrix(matrix)
 			else:
-				print 'The dog is dead'
+				print ('The dog is dead')
 				return 0
 
 		if aleato == 4:
 			posY=posY+1
 			if matrix[posX][posY] == 0:
 				matrix[posX][posY] = 1
-				print 'derecha'
-				print posX
-				print posY
+				print ('derecha')
+				print (posX)
+				print (posY)
 				listX.append(listX[-1]+10)
 				listY.append(listY[-1])
 				print_matrix(matrix)
 			else:
-				print 'The dog id dead'
+				print ('The dog id dead')
 				return 0
-	print 'The dog is alive!'
+	print ('The dog is alive!')
 	return 1
 
 

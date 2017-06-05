@@ -1,11 +1,14 @@
-#import pygame,sys,Tkinter,random
-#from pygame.locals import *
-
 import random
 import stddraw as d
 import color as c
 
 matrix=[]
+
+try:
+    dim=int(raw_input('Dimension:'))
+    times=int(raw_input('Nro Intentos:'))
+except ValueError:
+    print "Not a number"
 
 def create_matrix(dim,matrix):
 	fil = 0
@@ -24,24 +27,19 @@ def print_matrix(matrix):
 	for fila in matrix:
 		print fila
 
-
-
-# 1 = abajo
-# 2 = arriba
-# 3 = izquierda
-# 4 = derecha
 listX = []
 listY = []
 
 def run_dog(times, dim, matrix, listX, listY):
-	dimN = 100
-	jump = (dimN/dim) #33.33
+	_dim = float(dim)
+	dimN = _dim*10
+	jump =  _dim*10/2#33.33
 	radius = jump/2 #16
-
+	print jump
 	posX = dim/2
 	posY = dim/2
-	listX.append(posX*10+jump+radius)
-	listY.append(posY*10+jump+radius)
+	listX.append(jump)
+	listY.append(jump)
 	matrix[posX][posY] = 1
 	while posX != 0 and posX != dim-1 and posY != 0 and posY < dim-1:
 		aleato = random.randint(1, 4)
@@ -52,12 +50,12 @@ def run_dog(times, dim, matrix, listX, listY):
 				print 'abajo'
 				print posX
 				print posY
-				listX.append(listX[-1]+jump)
-				listY.append(listY[-1])
+				listX.append(listX[-1])
+				listY.append(listY[-1]-10)
 				print_matrix(matrix)
 			else :
 				print 'The dog is dead'
-				return
+				return 0
 
 		if aleato == 2:
 			posX = posX-1
@@ -66,12 +64,12 @@ def run_dog(times, dim, matrix, listX, listY):
 				print 'arriba'
 				print posX
 				print posY
-				listX.append(listX[-1]-jump)
-				listY.append(listY[-1])
+				listX.append(listX[-1])
+				listY.append(listY[-1]+10)
 				print_matrix(matrix)
 			else :
 				print 'The dog is dead'
-				return
+				return 0
 
 		if aleato == 3:
 			posY=posY-1
@@ -81,12 +79,12 @@ def run_dog(times, dim, matrix, listX, listY):
 				print 'izquierda'
 				print posX
 				print posY
-				listX.append(listX[-1])
-				listY.append(listY[-1]-jump)
+				listX.append(listX[-1]-10)
+				listY.append(listY[-1])
 				print_matrix(matrix)
 			else:
 				print 'The dog is dead'
-				return
+				return 0
 
 		if aleato == 4:
 			posY=posY+1
@@ -95,57 +93,61 @@ def run_dog(times, dim, matrix, listX, listY):
 				print 'derecha'
 				print posX
 				print posY
-				listX.append(listX[-1])
-				listY.append(listY[-1]+jump)
+				listX.append(listX[-1]+10)
+				listY.append(listY[-1])
 				print_matrix(matrix)
 			else:
 				print 'The dog id dead'
-				return
+				return 0
 	print 'The dog is alive!'
-	return
+	return 1
 
 
-dimN = 100
-dim = 6
+dimN = dim*10
+centro = dimN/2
 
-d.setXscale(0, dimN+20)
-d.setYscale(0, dimN+20)
+d.setXscale(0, dimN)
+d.setYscale(0, dimN)
 
-place = 50
+dimN = dim*10
+centro = dimN/2
+d.setXscale(0, dimN)
+d.setYscale(0, dimN)
 
-d.square((dimN/2)+10, (dimN/2)+10, dimN-((dimN/2)+10))
-#d.filledSquare(50, place, 2)
+while times != 0:
+	i = input("1 para seguir otro numero para cancelar: ")
+	if i == 1:
+		
+		d.clear()
+		
+		create_matrix(dim,matrix)
+		stil = run_dog(times,dim,matrix,listX, listY)
+		tam = len(listX)
+		ini = 0
+		while ini < tam:
+			d.square(listX[ini],listY[ini],5)
+			d.setPenColor(d.BLUE)	
+			d.text(listX[ini],listY[ini], str(ini))
+			ini += 1
 
-# while place < 94:
-# 	place+=1
-# 	d.filledSquare(50, place ,2)
-create_matrix(dim,matrix)
-run_dog(2,dim,matrix,listX, listY)
-
-d.line(20, 20, dimN, dimN)
-
-x = [1, 2, 3]
-y = [2, 4, 6]
-
-tam = len(listX)
-ini = 0
-while ini < tam:
-	d.filledSquare(listX[ini],listY[ini],(dimN/dim)/2)
-	# d.setPenColor(c.BLACK)
-	# d.text(50, 90, '1')
-	ini += 1
+		if stil == 1:
+			d.setPenColor(d.RED)	
+			d.text(centro,3, "PERRITO VIVE! :D")
+		else:
+			d.setPenColor(d.RED)	
+			d.text(centro,3, "PERRITO MUERE T.T")
+		times-=1
+		matrix = []
+		listX = []
+		listY = []
+		d.show(0)
+	else:
+		break
 
 
-print listX
-print listY
-#d.polygon(listX,listY)
-#d.clear()
 
-
-d.show(0)
 
 
 c = ''
 while c != '.':
 	c = input()
-

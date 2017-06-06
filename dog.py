@@ -1,6 +1,6 @@
 import random
-import stddraw as d
-import color as c
+# import stddraw as d
+# import color as c
 
 matrix=[]
 
@@ -35,9 +35,12 @@ def run_dog(times, dim, matrix, listX, listY):
 	dimN = _dim*10
 	jump =  _dim*10/2#33.33
 	radius = jump/2 #16
-	print (jump)
-	posX = dim/2
-	posY = dim/2
+	posX = int(dim/2)
+	posY = int(dim/2)
+	print('posX')
+	print (posX)
+	print('posY')
+	print (posY)
 	listX.append(jump)
 	listY.append(jump)
 	matrix[posX][posY] = 1
@@ -103,51 +106,54 @@ def run_dog(times, dim, matrix, listX, listY):
 	return 1
 
 
-dimN = dim*10
-centro = dimN/2
+# dimN = dim*10
+# centro = dimN/2
+create_matrix(dim,matrix)
+run_dog(times,dim,matrix,listX, listY)
 
-d.setXscale(0, dimN)
-d.setYscale(0, dimN)
 
-dimN = dim*10
-centro = dimN/2
-d.setXscale(0, dimN)
-d.setYscale(0, dimN)
+# d.setXscale(0, dimN)
+# d.setYscale(0, dimN)
 
-while times != 0:
-	i = input("1 para seguir otro numero para cancelar: ")
-	if i == 1:
+# dimN = dim*10
+# centro = dimN/2
+# d.setXscale(0, dimN)
+# d.setYscale(0, dimN)
+
+# while times != 0:
+# 	i = input("1 para seguir otro numero para cancelar: ")
+# 	if i == 1:
 		
-		d.clear()
+# 		d.clear()
 		
-		create_matrix(dim,matrix)
-		stil = run_dog(times,dim,matrix,listX, listY)
-		tam = len(listX)
-		ini = 0
-		while ini < tam:
-			d.square(listX[ini],listY[ini],5)
-			d.setPenColor(d.BLUE)	
-			d.text(listX[ini],listY[ini], str(ini))
-			ini += 1
+# 		create_matrix(dim,matrix)
+# 		stil = run_dog(times,dim,matrix,listX, listY)
+# 		tam = len(listX)
+# 		ini = 0
+# 		while ini < tam:
+# 			d.square(listX[ini],listY[ini],5)
+# 			d.setPenColor(d.BLUE)	
+# 			d.text(listX[ini],listY[ini], str(ini))
+# 			ini += 1
 
-		if stil == 1:
-			d.setPenColor(d.RED)	
-			d.text(centro,3, "PERRITO VIVE! :D")
-		else:
-			d.setPenColor(d.RED)	
-			d.text(centro,3, "PERRITO MUERE T.T")
-		times-=1
-		matrix = []
-		listX = []
-		listY = []
-		d.show(0)
-	else:
-		break
-
-
+# 		if stil == 1:
+# 			d.setPenColor(d.RED)	
+# 			d.text(centro,3, "PERRITO VIVE! :D")
+# 		else:
+# 			d.setPenColor(d.RED)	
+# 			d.text(centro,3, "PERRITO MUERE T.T")
+# 		times-=1
+# 		matrix = []
+# 		listX = []
+# 		listY = []
+# 		d.show(0)
+# 	else:
+# 		break
 
 
 
-c = ''
-while c != '.':
-	c = input()
+
+
+# c = ''
+# while c != '.':
+# 	c = input()
